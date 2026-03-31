@@ -34,7 +34,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
         setEditName(product.name)
         setEditUnit(product.unit)
         setEditQuantity(String(product.quantity))
-        setEditMinQuantity(String(product.min_quantity) || '')
+        setEditMinQuantity(product.min_quantity !== null ? String(product.min_quantity) : '')
     }
 
     const cancelEditing = () => {
