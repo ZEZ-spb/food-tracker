@@ -25,12 +25,12 @@ router.delete('/:id',                //DELETE   / = удалить продук�
     authenticate,
     removeProduct) 
     
-router.patch('/:id/photo',
+router.patch('/:id/photo',          //PATCH     / = добавить-обновить фото
     authenticate,
     upload.single('photo'),
     updatePhoto)  
 
-router.delete('/:id/photo',
+router.delete('/:id/photo',         //DELETE   / = удалить фото
     authenticate,
     removePhoto)        
 

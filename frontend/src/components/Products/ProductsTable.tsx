@@ -7,23 +7,23 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [name, setName] = useState('')
     const [unit, setUnit] = useState<'шт.' | 'кг' | 'л'>('кг')
-    const [quantity, setQuantity] = useState(0)
-    const [minQuantity, setMinQuantity] = useState(0)
+    const [quantity, setQuantity] = useState<string>('')
+    const [minQuantity, setMinQuantity] = useState<string>('')
     const [editingId, setEditingId] = useState<number | null>(null)
     const [editName, setEditName] = useState('')
     const [editUnit, setEditUnit] = useState<'шт.' | 'кг' | 'л'>('шт.')
-    const [editQuantity, setEditQuantity] = useState(0)
-    const [editMinQuantity, setEditMinQuantity] = useState(0)
+    const [editQuantity, setEditQuantity] = useState<string>('')
+    const [editMinQuantity, setEditMinQuantity] = useState<string>('')
     const [editingPhotoId, setEditingPhotoId] = useState<number | null>(null)
     const [error, setError] = useState<string>('')
 
     const handleCreate = async (): Promise<void> => {
         try {
-            await createProduct(token, name, unit, quantity, minQuantity || null)
+            await createProduct(token, name, unit, Number(quantity) || 0, Number(minQuantity) || null)
             setName('')
             setUnit('шт.')
-            setQuantity(0)
-            setMinQuantity(0)
+            setQuantity('')
+            setMinQuantity('')
         } catch (err: any) {
             setError(err.response?.data?.message || 'Ошибка при добавлении продукта')
         }
@@ -33,8 +33,8 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
         setEditingId(product.id)
         setEditName(product.name)
         setEditUnit(product.unit)
-        setEditQuantity(Number(product.quantity))
-        setEditMinQuantity(Number(product.min_quantity) || 0)
+        setEditQuantity(String(product.quantity))
+        setEditMinQuantity(String(product.min_quantity) || '')
     }
 
     const cancelEditing = () => {
@@ -43,7 +43,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
 
     const handleUpdate = async (): Promise<void> => {
         try {
-            await updateProduct(token, editingId!, editName, editUnit, editQuantity, editMinQuantity || null)
+            await updateProduct(token, editingId!, editName, editUnit, Number(quantity) || 0, Number(minQuantity) || null)
             setEditingId(null)
         } catch (err: any) {
             setError(err.response?.data?.message || 'Ошибка при обновлении продукта')
@@ -156,7 +156,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                                             value={editQuantity}
                                             step="0.01"
                                             min="0"
-                                            onChange={(e) => setEditQuantity(Number(e.target.value))}
+                                            onChange={(e) => setEditQuantity(e.target.value)}
                                         />
                                         :
                                         <div className={product.min_quantity && product.quantity < product.min_quantity
@@ -174,7 +174,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                                             value={editMinQuantity}
                                             step="0.01"
                                             min="0"
-                                            onChange={(e) => setEditMinQuantity(Number(e.target.value))}
+                                            onChange={(e) => setEditMinQuantity(e.target.value)}
                                         />
                                         : product.min_quantity ? `${product.min_quantity} ${product.unit}` : '—'
                                     }
@@ -237,7 +237,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                         value={quantity}
                         step="0.01"
                         min="0"
-                        onChange={(e) => setQuantity(Number(e.target.value))}
+                        onChange={(e) => setQuantity(e.target.value)}
                     />
                 </div>
 
@@ -249,7 +249,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                         value={minQuantity}
                         step="0.01"
                         min="0"
-                        onChange={(e) => setMinQuantity(Number(e.target.value))}
+                        onChange={(e) => setMinQuantity(e.target.value)}
                     />
                 </div>
 
