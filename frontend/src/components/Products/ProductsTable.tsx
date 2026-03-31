@@ -42,13 +42,13 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     }
 
     const handleUpdate = async (): Promise<void> => {
-        try {
-            await updateProduct(token, editingId!, editName, editUnit, Number(quantity) || 0, Number(minQuantity) || null)
-            setEditingId(null)
-        } catch (err: any) {
-            setError(err.response?.data?.message || 'Ошибка при обновлении продукта')
-        }
+    try {
+        await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
+        setEditingId(null)
+    } catch (err: any) {
+        setError(err.response?.data?.message || 'Ошибка при обновлении продукта')
     }
+}
 
     const handleRemove = async (): Promise<void> => {
         try {
