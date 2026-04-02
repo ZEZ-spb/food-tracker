@@ -42,13 +42,13 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     }
 
     const handleUpdate = async (): Promise<void> => {
-    try {
-        await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
-        setEditingId(null)
-    } catch (err: any) {
-        setError(err.response?.data?.message || 'Ошибка при обновлении продукта')
+        try {
+            await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
+            setEditingId(null)
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Ошибка при обновлении продукта')
+        }
     }
-}
 
     const handleRemove = async (): Promise<void> => {
         try {
@@ -218,11 +218,25 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
 
                 <div>
                     <label className="form-label">Единица измерения</label>
-                    <select
+                    {/* <select
                         className="form-select"
                         value={unit}
                         onChange={(e) => setUnit(e.target.value as 'шт.' | 'кг' | 'л')}
+                    > */}
+
+                    <select
+                        className="form-select"
+                        value={unit}
+                        onChange={(e) => {
+                            const newUnit = e.target.value as 'шт.' | 'кг' | 'л'
+                            setUnit(newUnit)
+                            if (newUnit === 'шт.') {
+                                setQuantity(String(Math.floor(Number(quantity) || 0)))
+                                setMinQuantity(String(Math.floor(Number(minQuantity) || 0)))
+                            }
+                        }}
                     >
+
                         <option value="шт.">шт.</option>
                         <option value="кг">кг</option>
                         <option value="л">л</option>
@@ -235,7 +249,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                         type="number"
                         className="form-control"
                         value={quantity}
-                        step="0.01"
+                        step={unit === 'шт.' ? '1' : '0.01'}
                         min="0"
                         onChange={(e) => setQuantity(e.target.value)}
                     />
@@ -247,7 +261,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                         type="number"
                         className="form-control"
                         value={minQuantity}
-                        step="0.01"
+                        step={unit === 'шт.' ? '1' : '0.01'}
                         min="0"
                         onChange={(e) => setMinQuantity(e.target.value)}
                     />
