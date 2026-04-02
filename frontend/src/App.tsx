@@ -16,7 +16,7 @@ function App() {
     if (isAuthenticated) {
       getProducts(token)
     }
-  }, [isAuthenticated, token])
+  }, [token])
 
   const handleLogout = async () => {
     await logout()
