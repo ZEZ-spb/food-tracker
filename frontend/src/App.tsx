@@ -7,7 +7,7 @@ import { ProductsTable } from './components/Products/ProductsTable'
 
 function App() {
   const { token, isAuthenticated, login, register, logout } = useAuth()
-  const { products, getProducts, createProduct, updateProduct, removeProduct, updatePhoto, removePhoto } = useProducts()
+  const { products, getProducts, createProduct, updateProduct, removeProduct, updatePhoto, removePhoto, clearProducts } = useProducts()
 
   const [showRegister, setShowRegister] = useState(false)
 //  const [error, setError] = useState<string>('')
@@ -19,6 +19,7 @@ function App() {
   }, [token])
 
   const handleLogout = async () => {
+    clearProducts()
     await logout()
   }
 

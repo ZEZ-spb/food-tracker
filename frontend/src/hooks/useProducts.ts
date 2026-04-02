@@ -86,8 +86,12 @@ export const useProducts = () => {
         await getProducts(token)
     }
 
+    const clearProducts = () => {
+    setProducts([])
+}
+
     return {
         products, getProducts, createProduct, updateProduct,
-        removeProduct, updatePhoto, removePhoto
+        removeProduct, updatePhoto, removePhoto, clearProducts
     }
 }
