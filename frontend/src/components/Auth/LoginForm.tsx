@@ -4,6 +4,7 @@ export const LoginForm = ({ onLogin }: { onLogin: (email: string, password: stri
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [error, setError] = useState<string>('')
+    const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = async (): Promise<void> => {
         try {
@@ -29,7 +30,7 @@ export const LoginForm = ({ onLogin }: { onLogin: (email: string, password: stri
                         />
                     </div>
 
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                         <label className="form-label">Password</label>
                         <input
                             type="password"
@@ -37,6 +38,25 @@ export const LoginForm = ({ onLogin }: { onLogin: (email: string, password: stri
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
+                    </div> */}
+
+                    <div className="mb-3">
+                        <label className="form-label">Password</label>
+                        <div className="input-group">
+                            <input
+                                type={showPassword ? 'text' : 'password'}
+                                className="form-control"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            <button
+                                className="btn btn-outline-secondary"
+                                type="button"
+                                onClick={() => setShowPassword(!showPassword)}
+                            >
+                                {showPassword ? '🙈' : '👁️'}
+                            </button>
+                        </div>
                     </div>
 
                     <button className="btn btn-primary w-100" onClick={handleSubmit} >
