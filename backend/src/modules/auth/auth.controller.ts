@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express'
 import * as authService from './auth.service'
 import { AuthRequest } from '../../middlewares/authenticate'
+import { User } from '../../entities/User'
 
 export const registerController = async (
   req: Request,
@@ -77,3 +78,17 @@ try {
     next(error)
   }
 }
+
+export const getUsersController = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+)=> {
+try {
+  const users: User[] = await authService.getUsers()
+  res.json(users)
+} catch (error) {
+    next(error)
+  }
+}
+

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { registerController, loginController, updateEmailController, 
-    updatePasswordController, logoutController, removeController } from './auth.controller'
+    updatePasswordController, logoutController, removeController, getUsersController } from './auth.controller'
 import { validateBody } from '../../middlewares/validate'
 import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto } from './auth.types'
 import { authenticate } from '../../middlewares/authenticate'
@@ -31,6 +31,11 @@ router.post('/logout',
     
 router.delete('/',
     authenticate,
-    removeController)    
+    removeController)
+    
+router.get('/',
+    authenticate,
+    getUsersController
+)
 
 export default router

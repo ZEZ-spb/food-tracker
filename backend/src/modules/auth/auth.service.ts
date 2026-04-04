@@ -96,3 +96,14 @@ const user = await userRepository.findOne({
 
 return userRepository.remove(user)
 }
+
+export const getUsers = async() => {
+  const users = await userRepository.find({
+    select: ['id', 'email', 'created_at']
+  })
+
+  if (users.length === 0)
+    throw new AppError('Пользователи не найдены', 404)
+
+  return users
+}
