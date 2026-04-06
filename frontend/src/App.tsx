@@ -4,7 +4,7 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
-import { removeUser } from './api/auth.api'
+//import { removeUser } from './api/auth.api'
 
 function App() {
   const { token, email, isAuthenticated, login, register, logout, removeUser } = useAuth()
