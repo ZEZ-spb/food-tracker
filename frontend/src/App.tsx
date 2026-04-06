@@ -4,10 +4,10 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
-import { updateEmail } from './api/auth.api'
+//import { updateEmail } from './api/auth.api'
 
 function App() {
-  const { token, email, isAuthenticated, login, register, logout, removeUser } = useAuth()
+  const { token, email, isAuthenticated, login, register, logout, removeUser, updateEmail } = useAuth()
   const { products, getProducts, createProduct, updateProduct, removeProduct,
     updatePhoto, removePhoto, clearProducts } = useProducts()
 
