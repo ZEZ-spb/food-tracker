@@ -15,13 +15,6 @@ export const useAuth = () => {
     setIsAuthenticated(true)
 }
 
-    // const register = async (email: string, password: string) => {
-    //     const response = await authApi.register(email, password)
-    //     setToken(response.token)
-    //     localStorage.setItem('token', response.token)
-    //     setIsAuthenticated(true)
-    // }
-
     const register = async (email: string, password: string) => {
         await authApi.register(email, password)
         // сразу логинимся

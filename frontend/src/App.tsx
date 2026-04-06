@@ -4,7 +4,6 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
-//import { removeUser } from './api/auth.api'
 
 function App() {
   const { token, email, isAuthenticated, login, register, logout, removeUser } = useAuth()
@@ -12,7 +11,6 @@ function App() {
     updatePhoto, removePhoto, clearProducts } = useProducts()
 
   const [showRegister, setShowRegister] = useState(false)
-  //  const [error, setError] = useState<string>('')
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -26,7 +24,9 @@ function App() {
   }
 
   const handleRemoveUser = async () => {
-    await removeUser(token)
+    if (window.confirm('Аккаунт будет удалён!')) {
+        await removeUser(token)
+    }
   }
 
   return (
@@ -46,8 +46,6 @@ function App() {
       ) : (
 
         <div>
-
-
 
           <div className="d-flex justify-content-end p-3">
             <div className="dropdown">
@@ -74,12 +72,6 @@ function App() {
             updatePhoto={updatePhoto}
             removePhoto={removePhoto}
             getProducts={getProducts} />
-
-          {/* <div className="text-center mt-3">
-            <button className="btn btn-danger" onClick={handleLogout}>
-              Выйти
-            </button>
-          </div> */}
 
         </div>
 
