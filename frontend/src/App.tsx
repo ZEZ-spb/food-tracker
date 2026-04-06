@@ -37,7 +37,7 @@ function App() {
 
 
   const handleUpdateEmail = async () => {
-    await updateEmail(token, email)
+    await updateEmail(email)
         setShowEmailModal(false)
   }
 
