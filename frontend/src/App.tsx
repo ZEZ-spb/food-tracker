@@ -4,6 +4,7 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
+import { updateEmail } from './api/auth.api'
 
 function App() {
   const { token, email, isAuthenticated, login, register, logout, removeUser } = useAuth()
@@ -11,6 +12,8 @@ function App() {
     updatePhoto, removePhoto, clearProducts } = useProducts()
 
   const [showRegister, setShowRegister] = useState(false)
+  const [showEmailModal, setShowEmailModal] = useState(false)
+  const [newEmail, setNewEmail] = useState('')
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,9 +28,28 @@ function App() {
 
   const handleRemoveUser = async () => {
     if (window.confirm('Аккаунт будет удалён!')) {
-        await removeUser(token)
+      await removeUser(token)
     }
   }
+
+  // const handleUpdateEmail = async () => {
+  //   await authApi.updateEmail(token, newEmail)
+  //   setNewEmail(newEmail)
+  //   localStorage.setItem('email', newEmail)
+  //   setShowEmailModal(false)
+  //   setNewEmail('')
+  // }
+
+
+
+
+  const handleUpdateEmail = async () => {
+    await updateEmail(token, email)
+        setShowEmailModal(false)
+  }
+
+
+
 
   return (
     <div>
@@ -54,7 +76,8 @@ function App() {
                 {email}
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
-                <li><button className="dropdown-item">Изменить email</button></li>
+                {/* <li><button className="dropdown-item">Изменить email</button></li> */}
+                <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
                 <li><button className="dropdown-item">Изменить пароль</button></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
@@ -76,6 +99,47 @@ function App() {
         </div>
 
       )}
+
+
+
+
+
+{showEmailModal && (
+    <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <div className="modal-dialog">
+            <div className="modal-content">
+                <div className="modal-header">
+                    <h5 className="modal-title">Изменить email</h5>
+                    <button className="btn-close" onClick={() => setShowEmailModal(false)} />
+                </div>
+                <div className="modal-body">
+                    <input
+                        type="email"
+                        className="form-control"
+                        placeholder="Новый email"
+                        value={newEmail}
+                        onChange={(e) => setNewEmail(e.target.value)}
+                    />
+                </div>
+                <div className="modal-footer">
+                    <button className="btn btn-secondary" onClick={() => setShowEmailModal(false)}>
+                        Отмена
+                    </button>
+                    <button className="btn btn-primary" onClick={handleUpdateEmail}>
+                        Сохранить
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+)}
+
+
+
+
+
+
+
     </div>
   )
 }

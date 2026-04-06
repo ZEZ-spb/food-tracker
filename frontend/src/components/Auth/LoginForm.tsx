@@ -30,16 +30,6 @@ export const LoginForm = ({ onLogin }: { onLogin: (email: string, password: stri
                         />
                     </div>
 
-                    {/* <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div> */}
-
                     <div className="mb-3">
                         <label className="form-label">Password</label>
                         <div className="input-group">

@@ -44,5 +44,18 @@ export const useAuth = () => {
     setIsAuthenticated(false)
 }
 
-    return { token, email, isAuthenticated, login, register, logout, removeUser }
+
+
+const handleUpdateEmail = async () => {
+    await authApi.updateEmail(token, email)
+    setEmail(email)
+    localStorage.setItem('email', email)
+    //setShowEmailModal(false)
+    setEmail('')
+  }
+
+
+
+
+    return { token, email, isAuthenticated, login, register, logout, removeUser, handleUpdateEmail}
 }
