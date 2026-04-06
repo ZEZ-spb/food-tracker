@@ -4,9 +4,10 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
+import { removeUser } from './api/auth.api'
 
 function App() {
-  const { token, email, isAuthenticated, login, register, logout } = useAuth()
+  const { token, email, isAuthenticated, login, register, logout, removeUser } = useAuth()
   const { products, getProducts, createProduct, updateProduct, removeProduct,
     updatePhoto, removePhoto, clearProducts } = useProducts()
 
@@ -22,6 +23,10 @@ function App() {
   const handleLogout = async () => {
     clearProducts()
     await logout()
+  }
+
+  const handleRemoveUser = async () => {
+    await removeUser(token)
   }
 
   return (
@@ -55,12 +60,10 @@ function App() {
                 <li><button className="dropdown-item">Изменить пароль</button></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
-                <li><button className="dropdown-item text-danger">Удалить аккаунт</button></li>
+                <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
               </ul>
             </div>
           </div>
-
-
 
           <ProductsTable
             products={products}
@@ -77,7 +80,7 @@ function App() {
               Выйти
             </button>
           </div> */}
-          
+
         </div>
 
       )}

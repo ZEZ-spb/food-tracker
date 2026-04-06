@@ -19,3 +19,9 @@ export const logout = async (token: string): Promise<void> => {
     headers: { Authorization: `Bearer ${token}` }
   })
 }
+
+export const removeUser = async (token: string): Promise<void> => {
+  await axios.delete(`${API_URL}/auth/`, {
+    headers: { Authorization: `Bearer ${token}` }
+  })
+}

@@ -42,5 +42,14 @@ export const useAuth = () => {
     setIsAuthenticated(false)
 }
 
-    return { token, email, isAuthenticated, login, register, logout }
+    const removeUser = async (token: string) => {
+    await authApi.removeUser(token)
+    setToken('')
+    setEmail('')
+    localStorage.removeItem('token')
+    localStorage.removeItem('email')
+    setIsAuthenticated(false)
+}
+
+    return { token, email, isAuthenticated, login, register, logout, removeUser }
 }
