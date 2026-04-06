@@ -39,25 +39,26 @@ function App() {
           </div>
         </div>
       ) : (
+
         <div>
 
 
 
-<div className="d-flex justify-content-end p-3">
+          <div className="d-flex justify-content-end p-3">
             <div className="dropdown">
-                <button className="btn btn-outline-secondary dropdown-toggle" 
-                    data-bs-toggle="dropdown">
-                    {email}
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end">
-                    <li><button className="dropdown-item">Изменить email</button></li>
-                    <li><button className="dropdown-item">Изменить пароль</button></li>
-                    <li><hr className="dropdown-divider" /></li>
-                    <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
-                    <li><button className="dropdown-item text-danger">Удалить аккаунт</button></li>
-                </ul>
+              <button className="btn btn-outline-secondary dropdown-toggle"
+                data-bs-toggle="dropdown">
+                {email}
+              </button>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li><button className="dropdown-item">Изменить email</button></li>
+                <li><button className="dropdown-item">Изменить пароль</button></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
+                <li><button className="dropdown-item text-danger">Удалить аккаунт</button></li>
+              </ul>
             </div>
-        </div>
+          </div>
 
 
 
@@ -70,12 +71,15 @@ function App() {
             updatePhoto={updatePhoto}
             removePhoto={removePhoto}
             getProducts={getProducts} />
-          <div className="text-center mt-3">
+
+          {/* <div className="text-center mt-3">
             <button className="btn btn-danger" onClick={handleLogout}>
               Выйти
             </button>
-          </div>
+          </div> */}
+          
         </div>
+
       )}
     </div>
   )
