@@ -54,8 +54,5 @@ const updateEmail = async (token: string, email: string) => {
     setEmail('')
   }
 
-
-
-
     return { token, email, isAuthenticated, login, register, logout, removeUser, updateEmail}
 }

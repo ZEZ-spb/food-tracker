@@ -31,4 +31,6 @@ export const updateEmail = async (token: string, email: string): Promise<void> =
     headers: { Authorization: `Bearer ${token}` }
   })
 
+  
+
 }

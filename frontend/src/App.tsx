@@ -32,14 +32,7 @@ function App() {
     }
   }
 
-  // const handleUpdateEmail = async () => {
-  //   await authApi.updateEmail(token, newEmail)
-  //   setNewEmail(newEmail)
-  //   localStorage.setItem('email', newEmail)
-  //   setShowEmailModal(false)
-  //   setNewEmail('')
-  // }
-
+  
 
 
 
