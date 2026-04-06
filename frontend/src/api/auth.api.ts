@@ -26,8 +26,8 @@ export const removeUser = async (token: string): Promise<void> => {
   })
 }
 
-export const updateEmail = async (token: string) => {
-  await axios.patch(`${API_URL}/auth/update-email`, {
+export const updateEmail = async (token: string, email: string): Promise<void> => {
+  await axios.patch(`${API_URL}/auth/update-email`, { token,email}, { 
     headers: { Authorization: `Bearer ${token}` }
   })
 

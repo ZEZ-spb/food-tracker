@@ -47,7 +47,7 @@ export const useAuth = () => {
 
 
 const updateEmail = async (token: string, email: string) => {
-    await authApi.updateEmail(token)
+    await authApi.updateEmail(token, email)
     setEmail(email)
     localStorage.setItem('email', email)
     //setShowEmailModal(false)
