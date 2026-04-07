@@ -5,7 +5,7 @@ export const useAuth = () => {
     const [token, setToken] = useState<string>(localStorage.getItem('token') || '')
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!localStorage.getItem('token'))
     const [email, setEmail] = useState<string>(localStorage.getItem('email') || '')
-//    const [newPassword, setNewPassword] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
 
     const login = async (email: string, password: string) => {
         const response = await authApi.login(email, password)
@@ -61,7 +61,7 @@ export const useAuth = () => {
 const updatePassword = async (currentPassword: string, newPassword: string) => {
 //        const password = await authApi.find(password )
         await authApi.updatePassword(token, currentPassword, newPassword)
-//        setNewPassword(newPassword)
+        setPassword(password)
         //localStorage.setItem('email', email)
         //setShowEmailModal(false)
         //setEmail('')
