@@ -138,7 +138,7 @@ function App() {
               <div className="modal-body">
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control mb-3"
                   placeholder="Текущий пароль"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
@@ -146,7 +146,7 @@ function App() {
 
                 <input
                   type="password"
-                  className="form-control mb-3"
+                  className="form-control"
                   placeholder="Новый пароль"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
