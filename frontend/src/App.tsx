@@ -32,13 +32,14 @@ function App() {
     }
   }
 
-  
+
 
 
 
   const handleUpdateEmail = async () => {
-    await updateEmail(email)
-        setShowEmailModal(false)
+    await updateEmail(newEmail)
+    setNewEmail('')
+    setShowEmailModal(false)
   }
 
 
@@ -97,35 +98,35 @@ function App() {
 
 
 
-{showEmailModal && (
-    <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-        <div className="modal-dialog">
+      {showEmailModal && (
+        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
             <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title">Изменить email</h5>
-                    <button className="btn-close" onClick={() => setShowEmailModal(false)} />
-                </div>
-                <div className="modal-body">
-                    <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Новый email"
-                        value={newEmail}
-                        onChange={(e) => setNewEmail(e.target.value)}
-                    />
-                </div>
-                <div className="modal-footer">
-                    <button className="btn btn-secondary" onClick={() => setShowEmailModal(false)}>
-                        Отмена
-                    </button>
-                    <button className="btn btn-primary" onClick={handleUpdateEmail}>
-                        Сохранить
-                    </button>
-                </div>
+              <div className="modal-header">
+                <h5 className="modal-title">Изменить email</h5>
+                <button className="btn-close" onClick={() => setShowEmailModal(false)} />
+              </div>
+              <div className="modal-body">
+                <input
+                  type="email"
+                  className="form-control"
+                  placeholder="Новый email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                />
+              </div>
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowEmailModal(false)}>
+                  Отмена
+                </button>
+                <button className="btn btn-primary" onClick={handleUpdateEmail}>
+                  Сохранить
+                </button>
+              </div>
             </div>
+          </div>
         </div>
-    </div>
-)}
+      )}
 
 
 

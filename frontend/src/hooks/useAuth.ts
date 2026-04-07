@@ -51,7 +51,7 @@ const updateEmail = async (email: string) => {
     setEmail(email)
     localStorage.setItem('email', email)
     //setShowEmailModal(false)
-    setEmail('')
+    //setEmail('')
   }
 
     return { token, email, isAuthenticated, login, register, logout, removeUser, updateEmail}
