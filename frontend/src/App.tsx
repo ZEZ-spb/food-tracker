@@ -157,7 +157,7 @@ function App() {
               </div>
 
               <div className="modal-body">
-                <div>
+                <div className="input-group">
                   <input
                     type={showCurrentPassword ? 'text' : 'password'}
                     className="form-control mb-3"
@@ -174,7 +174,7 @@ function App() {
                   </button>
                 </div>
 
-                <div>
+                <div className="input-group">
                   <input
                     type={showNewPassword ? 'text' : 'password'}
                     className="form-control"
