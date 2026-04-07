@@ -152,7 +152,7 @@ const handleUpdatePassword = async () => {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Изменить пароль</h5>
-                <button className="btn-close" onClick={() => setShowEmailModal(false)} />
+                <button className="btn-close" onClick={() => setShowPasswordModal(false)} />
               </div>
 
               <div className="modal-body">
