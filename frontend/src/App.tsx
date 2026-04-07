@@ -18,6 +18,8 @@ function App() {
   const [newPassword, setNewPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -145,6 +147,9 @@ function App() {
         </div>
       )}
 
+
+
+
       {showPasswordModal && (
         <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog">
@@ -156,20 +161,49 @@ function App() {
 
               <div className="modal-body">
                 <input
-                  type="password"
+
+
+                  // type="password"
+type={showCurrentPassword ? 'text' : 'password'}
+
+
                   className="form-control mb-3"
                   placeholder="Текущий пароль"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                 />
 
+
+<button
+                                className="btn btn-outline-secondary"
+                                type="button"
+                                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                            >
+                                {showCurrentPassword ? '🙈' : '👁️'}
+                            </button>
+
+
                 <input
-                  type="password"
+
+
+                  // type="password"
+type={showNewPassword ? 'text' : 'password'}
+
+
                   className="form-control"
                   placeholder="Новый пароль"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
+
+<button
+                                className="btn btn-outline-secondary"
+                                type="button"
+                                onClick={() => setShowNewPassword(!showNewPassword)}
+                            >
+                                {showNewPassword ? '🙈' : '👁️'}
+                            </button>
+
 
 {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
 
