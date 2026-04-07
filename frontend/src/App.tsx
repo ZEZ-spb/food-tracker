@@ -82,7 +82,7 @@ const handleUpdatePassword = async () => {
               <ul className="dropdown-menu dropdown-menu-end">
                 {/* <li><button className="dropdown-item">Изменить email</button></li> */}
                 <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
-                <li><button className="dropdown-item">Изменить пароль</button></li>
+                <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
                 <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
