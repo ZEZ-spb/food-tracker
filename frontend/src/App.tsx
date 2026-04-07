@@ -166,7 +166,7 @@ function App() {
                     onChange={(e) => setCurrentPassword(e.target.value)}
                   />
                   <button
-                    className="btn btn-outline-secondary"
+                    className="btn btn-outline-secondary mb-3"
                     type="button"
                     onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                   >
