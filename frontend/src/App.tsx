@@ -4,16 +4,18 @@ import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
-//import { updateEmail } from './api/auth.api'
 
 function App() {
-  const { token, email, isAuthenticated, login, register, logout, removeUser, updateEmail } = useAuth()
+  const { token, email, isAuthenticated, login, register, logout, removeUser, updateEmail, updatePassword } = useAuth()
   const { products, getProducts, createProduct, updateProduct, removeProduct,
     updatePhoto, removePhoto, clearProducts } = useProducts()
 
   const [showRegister, setShowRegister] = useState(false)
   const [showEmailModal, setShowEmailModal] = useState(false)
   const [newEmail, setNewEmail] = useState('')
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [currentPassword, setCurrentPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -32,15 +34,23 @@ function App() {
     }
   }
 
-
-
-
-
   const handleUpdateEmail = async () => {
     await updateEmail(newEmail)
     setNewEmail('')
     setShowEmailModal(false)
   }
+
+
+
+
+
+const handleUpdatePassword = async () => {
+    await updatePassword(currentPassword, newPassword)
+    setCurrentPassword('')
+    setNewPassword('')
+    setShowPasswordModal(false)
+  }
+
 
 
 
@@ -127,6 +137,57 @@ function App() {
           </div>
         </div>
       )}
+
+
+
+
+
+
+
+
+
+      {showPasswordModal && (
+        <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Изменить пароль</h5>
+                <button className="btn-close" onClick={() => setShowEmailModal(false)} />
+              </div>
+
+              <div className="modal-body">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Текущий пароль"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="modal-body">
+                <input
+                  type="password"
+                  className="form-control"
+                  placeholder="Новый пароль"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="modal-footer">
+                <button className="btn btn-secondary" onClick={() => setShowPasswordModal(false)}>
+                  Отмена
+                </button>
+                <button className="btn btn-primary" onClick={handleUpdatePassword}>
+                  Сохранить
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
 
 
 
