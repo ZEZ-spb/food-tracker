@@ -22,7 +22,9 @@ export const getProducts = async (
     next: NextFunction
 ) => {
     try {
-        const products: Product[] | null = await productsService.getProducts(req.userId!)
+        const products: Product[] = await productsService.getProducts(req.userId!)
+        if (products.length===0)  {res.status(400).json({ message: 'Продуктов нет' })
+            return}
         res.json(products)
 } catch (error) {
         next(error)
