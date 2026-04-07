@@ -124,6 +124,9 @@ function App() {
                   value={newEmail}
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
+
+{emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
+
               </div>
               
               <div className="modal-footer">
@@ -135,7 +138,7 @@ function App() {
                 </button>
               </div>
 
-{emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
+
 
             </div>
           </div>
@@ -167,6 +170,9 @@ function App() {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
+
+{passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
+
               </div>
 
 
@@ -180,7 +186,7 @@ function App() {
                 </button>
               </div>
 
-              {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
+              
 
             </div>
           </div>
