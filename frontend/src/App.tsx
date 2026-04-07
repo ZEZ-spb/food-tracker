@@ -127,10 +127,10 @@ function App() {
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
 
-{emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
+                {emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
 
               </div>
-              
+
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => { setShowEmailModal(false); setEmailError('') }}>
                   Отмена
@@ -147,9 +147,6 @@ function App() {
         </div>
       )}
 
-
-
-
       {showPasswordModal && (
         <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog">
@@ -160,56 +157,43 @@ function App() {
               </div>
 
               <div className="modal-body">
-                <input
+                <div>
+                  <input
+                    type={showCurrentPassword ? 'text' : 'password'}
+                    className="form-control mb-3"
+                    placeholder="Текущий пароль"
+                    value={currentPassword}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                  />
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  >
+                    {showCurrentPassword ? '🙈' : '👁️'}
+                  </button>
+                </div>
 
+                <div>
+                  <input
+                    type={showNewPassword ? 'text' : 'password'}
+                    className="form-control"
+                    placeholder="Новый пароль"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                  />
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  >
+                    {showNewPassword ? '🙈' : '👁️'}
+                  </button>
+                </div>
 
-                  // type="password"
-type={showCurrentPassword ? 'text' : 'password'}
-
-
-                  className="form-control mb-3"
-                  placeholder="Текущий пароль"
-                  value={currentPassword}
-                  onChange={(e) => setCurrentPassword(e.target.value)}
-                />
-
-
-<button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                            >
-                                {showCurrentPassword ? '🙈' : '👁️'}
-                            </button>
-
-
-                <input
-
-
-                  // type="password"
-type={showNewPassword ? 'text' : 'password'}
-
-
-                  className="form-control"
-                  placeholder="Новый пароль"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-
-<button
-                                className="btn btn-outline-secondary"
-                                type="button"
-                                onClick={() => setShowNewPassword(!showNewPassword)}
-                            >
-                                {showNewPassword ? '🙈' : '👁️'}
-                            </button>
-
-
-{passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
+                {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
 
               </div>
-
-
 
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => { setShowPasswordModal(false); setPasswordError('') }}>
@@ -219,9 +203,6 @@ type={showNewPassword ? 'text' : 'password'}
                   Сохранить
                 </button>
               </div>
-
-              
-
             </div>
           </div>
         </div>
