@@ -40,20 +40,12 @@ function App() {
     setShowEmailModal(false)
   }
 
-
-
-
-
-const handleUpdatePassword = async () => {
+  const handleUpdatePassword = async () => {
     await updatePassword(currentPassword, newPassword)
     setCurrentPassword('')
     setNewPassword('')
     setShowPasswordModal(false)
   }
-
-
-
-
 
   return (
     <div>
@@ -104,10 +96,6 @@ const handleUpdatePassword = async () => {
 
       )}
 
-
-
-
-
       {showEmailModal && (
         <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog">
@@ -138,14 +126,6 @@ const handleUpdatePassword = async () => {
         </div>
       )}
 
-
-
-
-
-
-
-
-
       {showPasswordModal && (
         <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
           <div className="modal-dialog">
@@ -163,12 +143,10 @@ const handleUpdatePassword = async () => {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                 />
-              </div>
 
-              <div className="modal-body">
                 <input
                   type="password"
-                  className="form-control"
+                  className="form-control mb-3"
                   placeholder="Новый пароль"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
@@ -187,13 +165,6 @@ const handleUpdatePassword = async () => {
           </div>
         </div>
       )}
-
-
-
-
-
-
-
 
     </div>
   )

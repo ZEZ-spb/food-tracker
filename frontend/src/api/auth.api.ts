@@ -33,12 +33,6 @@ export const updateEmail = async (token: string, email: string): Promise<void> =
 
 }
 
-
-
-
-
-
-
 export const updatePassword = async (token: string, currentPassword: string, newPassword: string): Promise<void> => {
   await axios.patch(`${API_URL}/auth/update-password`, { currentPassword, newPassword}, { 
     headers: { Authorization: `Bearer ${token}` }
