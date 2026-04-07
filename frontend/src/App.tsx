@@ -125,7 +125,7 @@ function App() {
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
               </div>
-              {emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
+              
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => { setShowEmailModal(false); setEmailError('') }}>
                   Отмена
@@ -134,6 +134,9 @@ function App() {
                   Сохранить
                 </button>
               </div>
+
+{emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
+
             </div>
           </div>
         </div>
@@ -166,7 +169,7 @@ function App() {
                 />
               </div>
 
-              {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
+
 
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => { setShowPasswordModal(false); setPasswordError('') }}>
@@ -176,6 +179,9 @@ function App() {
                   Сохранить
                 </button>
               </div>
+
+              {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
+
             </div>
           </div>
         </div>
