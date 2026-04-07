@@ -114,7 +114,7 @@ function App() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Изменить email</h5>
-                <button className="btn-close" onClick={() => setShowEmailModal(false)} />
+                <button className="btn-close" onClick={() => { setShowEmailModal(false); setEmailError('') }} />
               </div>
               <div className="modal-body">
                 <input
@@ -127,7 +127,7 @@ function App() {
               </div>
               {emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
               <div className="modal-footer">
-                <button className="btn btn-secondary" onClick={() => setShowEmailModal(false)}>
+                <button className="btn btn-secondary" onClick={() => { setShowEmailModal(false); setEmailError('') }}>
                   Отмена
                 </button>
                 <button className="btn btn-primary" onClick={handleUpdateEmail}>
@@ -145,7 +145,7 @@ function App() {
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Изменить пароль</h5>
-                <button className="btn-close" onClick={() => setShowPasswordModal(false)} />
+                <button className="btn-close" onClick={() => { setShowPasswordModal(false); setPasswordError('') }} />
               </div>
 
               <div className="modal-body">
@@ -169,7 +169,7 @@ function App() {
               {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
 
               <div className="modal-footer">
-                <button className="btn btn-secondary" onClick={() => setShowPasswordModal(false)}>
+                <button className="btn btn-secondary" onClick={() => { setShowPasswordModal(false); setPasswordError('') }}>
                   Отмена
                 </button>
                 <button className="btn btn-primary" onClick={handleUpdatePassword}>
