@@ -16,6 +16,8 @@ function App() {
   const [showPasswordModal, setShowPasswordModal] = useState(false)
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -35,16 +37,26 @@ function App() {
   }
 
   const handleUpdateEmail = async () => {
-    await updateEmail(newEmail)
-    setNewEmail('')
-    setShowEmailModal(false)
+    try {
+      await updateEmail(newEmail)
+      setNewEmail('')
+      setEmailError('')
+      setShowEmailModal(false)
+    } catch (err: any) {
+      setEmailError(err.response?.data?.message || 'Ошибка при изменении email')
+    }
   }
 
   const handleUpdatePassword = async () => {
-    await updatePassword(currentPassword, newPassword)
-    setCurrentPassword('')
-    setNewPassword('')
-    setShowPasswordModal(false)
+    try {
+      await updatePassword(currentPassword, newPassword)
+      setCurrentPassword('')
+      setNewPassword('')
+      setPasswordError('')
+      setShowPasswordModal(false)
+    } catch (err: any) {
+      setPasswordError(err.response?.data?.message || 'Ошибка при изменении пароля')
+    }
   }
 
   return (
@@ -113,6 +125,7 @@ function App() {
                   onChange={(e) => setNewEmail(e.target.value)}
                 />
               </div>
+              {emailError && <div className="alert alert-danger mt-2">{emailError}</div>}
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setShowEmailModal(false)}>
                   Отмена
@@ -152,6 +165,8 @@ function App() {
                   onChange={(e) => setNewPassword(e.target.value)}
                 />
               </div>
+
+              {passwordError && <div className="alert alert-danger mt-2">{passwordError}</div>}
 
               <div className="modal-footer">
                 <button className="btn btn-secondary" onClick={() => setShowPasswordModal(false)}>
