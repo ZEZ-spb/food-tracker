@@ -128,8 +128,14 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                                     {product.photo_url
 
                                         ? <div className="d-flex align-items-start gap-3" >
-                                            <img src={product.photo_url} alt={product.name}
-                                                style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+
+                                            {/* <img src={product.photo_url} alt={product.name}
+                                                style={{ width: '50px', height: '50px', objectFit: 'cover' }} /> */}
+
+                                            <a href={product.photo_url} target="_blank" rel="noreferrer">
+                                                <img src={product.photo_url} alt={product.name}
+                                                    style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
+                                            </a>
 
                                             <button className="btn btn-danger btn-sm p-0 px-1" onClick={() => {
                                                 handleRemovePhoto(product.id)
