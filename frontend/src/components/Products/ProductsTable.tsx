@@ -19,6 +19,10 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
 
     const handleCreate = async (): Promise<void> => {
         try {
+            if (!name.trim()) {
+                setError('Введите название продукта')
+                return
+            }
             await createProduct(token, name, unit, Number(quantity) || 0, Number(minQuantity) || null)
             setName('')
             setUnit('шт.')
