@@ -59,10 +59,6 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
             return
         }
 
-console.log('editName:', editName)
-console.log('products:', products.map(p => p.name))
-console.log('duplicate:', duplicate)        
-
         try {
             await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
             setEditingId(null)
