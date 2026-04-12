@@ -46,6 +46,10 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     }
 
     const handleUpdate = async (): Promise<void> => {
+        if (!editName.trim()) {
+            setError('Название продукта не может быть пустым')
+            return
+        }
         try {
             await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
             setEditingId(null)
