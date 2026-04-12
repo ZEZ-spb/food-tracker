@@ -50,6 +50,15 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
             setError('Название продукта не может быть пустым')
             return
         }
+
+        const duplicate = products.find(p =>
+            p.name.toLowerCase() === editName.trim().toLowerCase() && p.id !== editingId
+        )
+        if (duplicate) {
+            setError('Продукт с таким названием уже существует')
+            return
+        }
+
         try {
             await updateProduct(token, editingId!, editName, editUnit, Number(editQuantity) || 0, Number(editMinQuantity) || null)
             setEditingId(null)
