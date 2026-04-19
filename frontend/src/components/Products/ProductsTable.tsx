@@ -98,7 +98,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     }
 
     return (
-        <div className="container mt-4">
+        <div className="container mb-4">
             <h2 className="mb-2">Продукты</h2>
 
             {error && (
