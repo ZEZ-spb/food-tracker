@@ -1,8 +1,8 @@
-import axios from 'axios'
+import axios from './axios'
 import type { Product } from '../types'
 
 //const API_URL = 'http://localhost:3000/api'
-const API_URL = import.meta.env.VITE_API_URL
+//const API_URL = import.meta.env.VITE_API_URL
 
 export const createProduct = async (
     token: string,
@@ -12,7 +12,7 @@ export const createProduct = async (
     min_quantity: number | null
 ): Promise<Product> => {
     const response = await axios.post(
-        `${API_URL}/products`,
+        `/products`,
         { name, unit, quantity, min_quantity },
         { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -23,7 +23,7 @@ export const getProducts = async (
     token: string,
 ): Promise<Product[]> => {
     const response = await axios.get(
-        `${API_URL}/products`,
+        `/products`,
         { headers: { Authorization: `Bearer ${token}` } }
     )
     return response.data
@@ -38,7 +38,7 @@ export const updateProduct = async (
     min_quantity: number | null
 ): Promise<Product> => {
     const response = await axios.put(
-        `${API_URL}/products/${id}`,
+        `/products/${id}`,
         { name, unit, quantity, min_quantity },
         { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -50,7 +50,7 @@ export const removeProduct = async (
     id: number,
 ): Promise<void> => {
     await axios.delete(
-        `${API_URL}/products/${id}`,
+        `/products/${id}`,
         { headers: { Authorization: `Bearer ${token}` } }
     )
 }
@@ -64,7 +64,7 @@ export const updatePhoto = async (
     formData.append('photo', file)
 
     const response = await axios.patch(
-        `${API_URL}/products/${id}/photo`,
+        `/products/${id}/photo`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
     )
@@ -76,7 +76,7 @@ export const removePhoto = async (
     id: number,
 ): Promise<void> => {
     await axios.delete(
-        `${API_URL}/products/${id}/photo`,
+        `/products/${id}/photo`,
         { headers: { Authorization: `Bearer ${token}` } }
     )
 }
