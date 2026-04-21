@@ -28,15 +28,19 @@ export const removeUser = async (token: string): Promise<void> => {
 }
 
 export const updateEmail = async (token: string, email: string): Promise<void> => {
-  await axios.patch(`/auth/update-email`, { email}, { 
+  await axios.patch(`/auth/update-email`, { email }, { 
     headers: { Authorization: `Bearer ${token}` }
   })
-
 }
 
 export const updatePassword = async (token: string, currentPassword: string, newPassword: string): Promise<void> => {
   await axios.patch(`/auth/update-password`, { currentPassword, newPassword}, { 
     headers: { Authorization: `Bearer ${token}` }
   })
+}
 
+export const updateCurrency = async (token: string, currency: 'ILS' | 'EUR' | 'USD' | 'RUB'): Promise<void> => {
+  await axios.patch(`/auth/update-currency`, { currency} , { 
+    headers: { Authorization: `Bearer ${token}` }
+  })
 }

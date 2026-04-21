@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength } from 'class-validator'
+import { IsEmail, IsString, MinLength, IsEnum } from 'class-validator'
 
 export class RegisterDto {
   @IsEmail({}, { message: 'Некорректный email' })
@@ -31,4 +31,9 @@ export class UpdatePasswordDto {
   @IsString()
   @MinLength(6, { message: 'Новый пароль должен содержать минимум 6 символов' })
   newPassword: string
+}
+
+export class UpdateCurrencyDto {
+  @IsEnum(['ILS', 'EUR', 'USD', 'RUB'], { message: 'Некорректная валюта' })
+  currency: 'ILS' | 'EUR' | 'USD' | 'RUB'
 }

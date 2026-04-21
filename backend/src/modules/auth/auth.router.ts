@@ -1,8 +1,9 @@
 import { Router } from 'express'
 import { registerController, loginController, updateEmailController, 
-    updatePasswordController, logoutController, removeController, getUsersController } from './auth.controller'
+    updatePasswordController, logoutController, removeController, 
+    getUsersController, updateCurrencyController } from './auth.controller'
 import { validateBody } from '../../middlewares/validate'
-import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto } from './auth.types'
+import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto, UpdateCurrencyDto } from './auth.types'
 import { authenticate } from '../../middlewares/authenticate'
 
 const router = Router()
@@ -37,5 +38,10 @@ router.get('/',
     authenticate,
     getUsersController
 )
+
+router.patch('/update-currency',
+    authenticate,
+    validateBody(UpdateCurrencyDto),
+    updateCurrencyController)
 
 export default router

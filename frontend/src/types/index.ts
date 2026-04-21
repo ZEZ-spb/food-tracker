@@ -15,6 +15,7 @@ export interface User {
 
 export interface AuthResponse {
   token: string
+  currency: 'ILS' | 'EUR' | 'USD' | 'RUB'
 }
 
 export interface ApiError {

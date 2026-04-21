@@ -25,8 +25,8 @@ export const loginController = async (
   next: NextFunction
 ) => {
   try {
-    const token = await authService.login(req.body)
-    res.json({ token })
+    const { token, currency } = await authService.login(req.body)
+    res.json({ token, currency })
   } catch (error) {
     next(error)
   }
@@ -88,6 +88,19 @@ try {
   const users: User[] = await authService.getUsers()
   res.json(users)
 } catch (error) {
+    next(error)
+  }
+}
+
+export const updateCurrencyController = async (
+  req: AuthRequest,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    await authService.updateCurrency(req.userId!, req.body)
+    res.json({ message: 'Валюта успешно изменена' })
+  } catch (error) {
     next(error)
   }
 }

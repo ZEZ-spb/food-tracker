@@ -1,7 +1,7 @@
 import { AppDataSource } from '../../config/database'
 import { User } from '../../entities/User'
 import { AppError } from '../../utils/AppError'
-import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto } from './auth.types'
+import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto, UpdateCurrencyDto } from './auth.types'
 import { generateAccessToken } from '../../utils/jwt'
 import bcrypt from 'bcryptjs'
 
@@ -26,7 +26,7 @@ export const register = async (dto: RegisterDto): Promise<User> => {
   return userRepository.save(user)
 }
 
-export const login = async (dto: LoginDto): Promise<string> => {
+export const login = async (dto: LoginDto): Promise<{token: string, currency: string}> => {
   const user = await userRepository.findOne({
     where: { email: dto.email }
   })
@@ -41,8 +41,10 @@ export const login = async (dto: LoginDto): Promise<string> => {
     throw new AppError('Неверный email или пароль', 401)
   }
 
-  return generateAccessToken(user.id)
-
+  return {
+    token: generateAccessToken(user.id),
+    currency: user.currency
+  }
 }
 
 export const updateEmail = async (userId: number, dto: UpdateEmailDto) => {
@@ -106,4 +108,17 @@ export const getUsers = async() => {
     throw new AppError('Пользователи не найдены', 404)
 
   return users
+}
+
+export const updateCurrency = async (userId: number, dto: UpdateCurrencyDto) => {
+  const user = await userRepository.findOne({
+    where: { id: userId }
+  })
+
+  if (!user) {
+    throw new AppError('Пользователь не найден', 401)
+  }
+
+  user.currency = dto.currency
+  return userRepository.save(user)
 }
