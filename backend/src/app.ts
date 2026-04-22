@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import authRouter from './modules/auth/auth.router'
 import productsRouter from './modules/products/products.router'
+import transactionsRouter from './modules/transactions/transactions.router'
 import { errorHandler } from './middlewares/errorHandler'
 
 dotenv.config()
@@ -20,6 +21,7 @@ app.use(express.json())
 
 app.use('/api/auth', authRouter)
 app.use('/api/products', productsRouter)
+app.use('/api/transactions', transactionsRouter)
 
 app.use(errorHandler)
 
