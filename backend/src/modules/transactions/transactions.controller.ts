@@ -17,6 +17,7 @@ export const createTransaction = async (
             req.body.cost,
             req.body.currency
         )
+        console.log('userId из токена:', req.userId)
         res.status(201).json({ message: `Покупка/расход добавлен` })
     } catch (error) {
         next(error)

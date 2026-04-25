@@ -71,6 +71,8 @@ export const updateProduct = async (id: number, userId: number, dto: ProductDto)
       currency: null
     })
 
+    console.log('updateProduct userId:', userId, 'quantity_delta:', quantity_delta)
+
     await transactionRepository.save(transaction)
   }
 

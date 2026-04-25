@@ -2,7 +2,7 @@ import { useState, useRef } from "react"
 import type { Product, ProductsTableProps } from '../../types'
 
 export const ProductsTable = ({ products, token, createProduct, updateProduct, removeProduct,
-    updatePhoto, removePhoto, getProducts }: ProductsTableProps) => {
+    updatePhoto, removePhoto, getProducts, createTransaction, currency }: ProductsTableProps) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [name, setName] = useState('')
@@ -16,6 +16,9 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
     const [editMinQuantity, setEditMinQuantity] = useState<string>('')
     const [editingPhotoId, setEditingPhotoId] = useState<number | null>(null)
     const [error, setError] = useState<string>('')
+    const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+    const [transactionQuantity, setTransactionQuantity] = useState<string>('')
+    const [transactionCost, setTransactionCost] = useState<string>('')
 
     const handleCreate = async (): Promise<void> => {
         try {
@@ -97,6 +100,31 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
         }
     }
 
+    const handleTransaction = async (type: 'purchase' | 'expense') => {
+        if (!selectedProduct) return
+        if (!transactionQuantity || Number(transactionQuantity) <= 0) {
+            setError('Введите количество')
+            return
+        }
+        try {
+            await createTransaction(
+                token,
+                selectedProduct.id,
+                type,
+                Number(transactionQuantity),
+                transactionCost ? Number(transactionCost) : undefined,
+                currency as 'ILS' | 'EUR' | 'USD' | 'RUB' | undefined
+            )
+            await getProducts(token)
+            setTransactionQuantity('')
+            setTransactionCost('')
+            setSelectedProduct(null)
+            console.log('token в handleTransaction:', token)
+        } catch (err: any) {
+            setError(err.response?.data?.message || 'Ошибка при сохранении транзакции')
+        }
+    }
+
     return (
         <div className="container mb-4">
             <h2 className="mb-2">Продукты</h2>
@@ -123,7 +151,12 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                         products.map(product =>
                             <tr key={product.id}>
 
-                                <td onDoubleClick={() => startEditing(product)}>
+                                <td
+                                    onClick={() => setSelectedProduct(product)}
+                                    onDoubleClick={() => startEditing(product)}
+                                    style={{ cursor: 'pointer' }}
+                                    className={`${product.min_quantity && Number(product.quantity) < Number(product.min_quantity) ? 'text-danger' : 'text-success'} ${selectedProduct?.id === product.id ? 'fw-bold' : ''}`}
+                                >
                                     {editingId === product.id
                                         ? <input
                                             type="text"
@@ -131,10 +164,7 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                                             value={editName}
                                             onChange={(e) => setEditName(e.target.value)}
                                         />
-                                        : <div className={product.min_quantity && product.quantity < product.min_quantity
-                                            ? 'text-danger' : 'text-success'}>
-                                            {product.name}
-                                        </div>
+                                        : product.name
                                     }
                                 </td>
 
@@ -145,9 +175,6 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                                     {product.photo_url
 
                                         ? <div className="d-flex align-items-start gap-3" >
-
-                                            {/* <img src={product.photo_url} alt={product.name}
-                                                style={{ width: '50px', height: '50px', objectFit: 'cover' }} /> */}
 
                                             <a href={product.photo_url} target="_blank" rel="noreferrer">
                                                 <img src={product.photo_url} alt={product.name}
@@ -295,6 +322,42 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                 </button>
 
             </div>
+
+            {selectedProduct && (
+                <div className="mt-4">
+                    <h3 className="mb-3">Покупка / Расход: <span className="text-primary">{selectedProduct.name}</span></h3>
+                    <div className="d-flex gap-4 align-items-end">
+                        <div>
+                            <label className="form-label">Количество</label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                step="0.01"
+                                min="0.01"
+                                value={transactionQuantity}
+                                onChange={(e) => setTransactionQuantity(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label className="form-label">Стоимость (необязательно)</label>
+                            <input
+                                type="number"
+                                className="form-control"
+                                step="0.01"
+                                min="0"
+                                value={transactionCost}
+                                onChange={(e) => setTransactionCost(e.target.value)}
+                            />
+                        </div>
+                        {/* <button className="btn btn-success">Покупка</button>
+                        <button className="btn btn-warning">Расход</button> */}
+                        <button className="btn btn-success" onClick={() => handleTransaction('purchase')}>Покупка</button>
+                        <button className="btn btn-warning" onClick={() => handleTransaction('expense')}>Расход</button>
+                        <button className="btn btn-secondary" onClick={() => setSelectedProduct(null)}>Отмена</button>
+                    </div>
+                </div>
+            )}
+
             <input
                 type="file"
                 ref={fileInputRef}

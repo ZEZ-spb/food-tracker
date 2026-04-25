@@ -67,7 +67,6 @@ export const getTransactions = async (
     userId: number,
     period: PeriodType
 ): Promise<StockTransaction[]> => {
-
     await transactionRepository.delete({
         user_id: userId,
         created_at: LessThan(new Date(new Date().setFullYear(new Date().getFullYear() - 1)))

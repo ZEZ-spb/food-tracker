@@ -1,15 +1,18 @@
 import { useAuth } from './hooks/useAuth'
 import { useProducts } from './hooks/useProducts'
+import { useTransactions } from './hooks/useTransactions'
 import { LoginForm } from './components/Auth/LoginForm'
 import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
+import { TransactionsPage } from './components/Transactions/TransactionsPage'
 
 function App() {
   const { token, email, currency, isAuthenticated, login, register, logout, removeUser,
     updateEmail, updatePassword, updateCurrency } = useAuth()
   const { products, getProducts, createProduct, updateProduct, removeProduct,
     updatePhoto, removePhoto, clearProducts } = useProducts()
+  const { transactions, createTransaction, getTransactions, updateTransaction, removeTransaction } = useTransactions()
 
   const [showRegister, setShowRegister] = useState(false)
   const [showEmailModal, setShowEmailModal] = useState(false)
@@ -21,12 +24,19 @@ function App() {
   const [passwordError, setPasswordError] = useState('')
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showTransactions, setShowTransactions] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
       getProducts(token)
     }
   }, [token])
+
+  useEffect(() => {
+    if (isAuthenticated && showTransactions) {
+      getTransactions(token, '1m')
+    }
+  }, [showTransactions, token])
 
   const handleLogout = async () => {
     clearProducts()
@@ -80,7 +90,14 @@ function App() {
 
         <div>
 
-          <div className="d-flex justify-content-end p-3">
+
+          <div className="d-flex justify-content-between align-items-center p-3">
+            {/* <div className="d-flex justify-content-end p-3"> */}
+
+            <button className="btn btn-outline-primary" onClick={() => setShowTransactions(!showTransactions)}>
+              {showTransactions ? 'Продукты' : 'Покупки'}
+            </button>
+
             <div className="dropdown">
               <button className="btn btn-outline-secondary dropdown-toggle"
                 data-bs-toggle="dropdown">
@@ -114,15 +131,34 @@ function App() {
             </div>
           </div>
 
-          <ProductsTable
-            products={products}
-            token={token}
-            createProduct={createProduct}
-            updateProduct={updateProduct}
-            removeProduct={removeProduct}
-            updatePhoto={updatePhoto}
-            removePhoto={removePhoto}
-            getProducts={getProducts} />
+          {showTransactions ? (
+
+            // <p>Покупки — здесь будет таблица транзакций</p>
+
+<TransactionsPage
+    transactions={transactions}
+    token={token}
+    period="1m"
+    getTransactions={getTransactions}
+    removeTransaction={removeTransaction}
+    updateTransaction={updateTransaction}
+    currency={currency}
+/>
+
+          ) : (
+            <ProductsTable
+              products={products}
+              token={token}
+              createProduct={createProduct}
+              updateProduct={updateProduct}
+              removeProduct={removeProduct}
+              updatePhoto={updatePhoto}
+              removePhoto={removePhoto}
+              getProducts={getProducts}
+              createTransaction={createTransaction}
+              currency={currency}
+            />
+          )}
 
         </div>
 
@@ -157,8 +193,6 @@ function App() {
                   Сохранить
                 </button>
               </div>
-
-
 
             </div>
           </div>
