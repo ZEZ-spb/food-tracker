@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import type { Transaction, TransactionsPageProps } from '../../types'
 
 export const TransactionsPage = ({ transactions, token, getTransactions,
-    removeTransaction, updateTransaction, currency }: TransactionsPageProps) => {
+    //removeTransaction, updateTransaction, 
+    currency }: TransactionsPageProps) => {
     const [period, setPeriod] = useState<'1m' | '3m' | '6m' | '1y'>('1m')
 
     useEffect(() => {
