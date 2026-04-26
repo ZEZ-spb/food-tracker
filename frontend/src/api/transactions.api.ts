@@ -7,11 +7,17 @@ export const createTransaction = async (
     type: 'purchase' | 'expense',
     quantity: number,
     cost?: number,
-    currency?: 'ILS' | 'EUR' | 'USD' | 'RUB',
+//    currency?: 'ILS' | 'EUR' | 'USD' | 'RUB',
 ): Promise<Transaction> => {
     const response = await axios.post(
         `/transactions`,
-        { product_id, type, quantity, cost, currency },
+        { 
+            product_id, 
+            type, 
+            quantity, 
+            cost, 
+//            currency 
+        },
         { headers: { Authorization: `Bearer ${token}` } }
     )
     return response.data
@@ -45,11 +51,16 @@ export const updateTransaction = async (
     token: string,
     id: number,
     quantity_delta: number,
-    cost?: number
+    cost?: number | null,
+//    currency?: string | null
 ): Promise<Transaction> => {
     const response = await axios.patch(
         `/transactions/${id}`,
-        { quantity_delta, cost },
+        { 
+            quantity_delta, 
+            cost, 
+//            currency 
+        },
         { headers: { Authorization: `Bearer ${token}` } }
     )
     return response.data

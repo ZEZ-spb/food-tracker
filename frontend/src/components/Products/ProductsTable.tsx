@@ -1,8 +1,18 @@
 import { useState, useRef } from "react"
 import type { Product, ProductsTableProps } from '../../types'
 
-export const ProductsTable = ({ products, token, createProduct, updateProduct, removeProduct,
-    updatePhoto, removePhoto, getProducts, createTransaction, currency }: ProductsTableProps) => {
+export const ProductsTable = ({ 
+    products, 
+    token, 
+    createProduct, 
+    updateProduct, 
+    removeProduct,
+    updatePhoto, 
+    removePhoto, 
+    getProducts, 
+    createTransaction, 
+//    currency 
+}: ProductsTableProps) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
     const [name, setName] = useState('')
@@ -113,13 +123,12 @@ export const ProductsTable = ({ products, token, createProduct, updateProduct, r
                 type,
                 Number(transactionQuantity),
                 transactionCost ? Number(transactionCost) : undefined,
-                currency as 'ILS' | 'EUR' | 'USD' | 'RUB' | undefined
+//                currency as 'ILS' | 'EUR' | 'USD' | 'RUB' | undefined
             )
             await getProducts(token)
             setTransactionQuantity('')
             setTransactionCost('')
             setSelectedProduct(null)
-            console.log('token в handleTransaction:', token)
         } catch (err: any) {
             setError(err.response?.data?.message || 'Ошибка при сохранении транзакции')
         }

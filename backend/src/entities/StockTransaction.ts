@@ -33,12 +33,12 @@ export class StockTransaction {
   @Column({ type: 'decimal', precision: 10, scale: 2, nullable: true })
   cost: number | null
 
-  @Column({
-    type: 'enum',
-    enum: ['ILS', 'EUR', 'USD', 'RUB'],
-    nullable: true
-  })
-  currency: 'ILS' | 'EUR' | 'USD' | 'RUB' | null
+  // @Column({
+  //   type: 'enum',
+  //   enum: ['ILS', 'EUR', 'USD', 'RUB'],
+  //   nullable: true
+  // })
+  // currency: 'ILS' | 'EUR' | 'USD' | 'RUB' | null
 
   @Column({ type: 'varchar', nullable: true })
   note: string | null

@@ -14,7 +14,7 @@ export const createTransaction = async (
     type: 'purchase' | 'expense',
     delta: number,
     cost?: number,
-    currency?: 'ILS' | 'EUR' | 'USD' | 'RUB'
+    // currency?: 'ILS' | 'EUR' | 'USD' | 'RUB'
 ): Promise<StockTransaction> => {
 
     const product = await productRepository.findOne({
@@ -43,7 +43,7 @@ export const createTransaction = async (
         quantity_delta: type === 'purchase' ? delta : -delta,
         quantity_after: product.quantity,
         cost: cost ?? null,
-        currency: currency ?? null
+//        currency: currency ?? null
     })
 
     return transactionRepository.save(transaction)
@@ -95,9 +95,15 @@ export const removeTransaction = async (id: number, userId: number): Promise<Sto
 
 }
 
-export const updateTransaction = async (id: number, userId: number, quantity_delta:
-    number, cost?: number): Promise<StockTransaction> => {
-    let transaction = await transactionRepository.findOne({
+export const updateTransaction = async (
+    id: number, 
+    userId: number, 
+    quantity_delta:
+    number, cost?: 
+    number, 
+//    currency?: string | null
+): Promise<StockTransaction> => {
+    const transaction = await transactionRepository.findOne({
         where: { id, user_id: userId }
     })
 
@@ -106,6 +112,7 @@ export const updateTransaction = async (id: number, userId: number, quantity_del
 
     transaction.quantity_delta = quantity_delta
     transaction.cost = cost ?? null
+//    transaction.currency = currency as any ?? null
 
     return transactionRepository.save(transaction)
 }

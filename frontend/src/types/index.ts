@@ -21,7 +21,7 @@ export interface Transaction {
   quantity_delta: number
   quantity_after: number
   cost: number | null
-  currency: 'ILS' | 'EUR' | 'USD' | 'RUB' | null
+//  currency: 'ILS' | 'EUR' | 'USD' | 'RUB' | null
   note: string | null
   created_at: string
   product: Product
@@ -47,9 +47,15 @@ export interface ProductsTableProps {
   updatePhoto: (token: string, id: number, file: File) => Promise<void>
   removePhoto: (token: string, id: number) => Promise<void>
   getProducts: (token: string) => Promise<void>
-  createTransaction: (token: string, product_id: number, type: 'purchase' | 'expense',
-    quantity: number, cost?: number, currency?: 'ILS' | 'EUR' | 'USD' | 'RUB') => Promise<void>
-  currency: string
+  createTransaction: (
+    token: string, 
+    product_id: number, 
+    type: 'purchase' | 'expense',
+    quantity: number, 
+    cost?: number, 
+    //currency?: 'ILS' | 'EUR' | 'USD' | 'RUB'
+  ) => Promise<void>
+//  currency: string
 }
 
 export interface TransactionsPageProps {
@@ -58,6 +64,12 @@ export interface TransactionsPageProps {
   period: '1m' | '3m' | '6m' | '1y'
   getTransactions: (token: string, period: '1m' | '3m' | '6m' | '1y') => Promise<void>
   removeTransaction: (token: string, id: number) => Promise<void>
-  updateTransaction: (token: string, id: number, quantity_delta: number, cost?: number) => Promise<void>
+  updateTransaction: (
+    token: string, 
+    id: number, 
+    quantity_delta: number, 
+    cost?: number | null, 
+//    currency?: string | null
+  ) => Promise<void>
   currency: string
 }

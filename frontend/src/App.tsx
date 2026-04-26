@@ -92,7 +92,6 @@ function App() {
 
 
           <div className="d-flex justify-content-between align-items-center p-3">
-            {/* <div className="d-flex justify-content-end p-3"> */}
 
             <button className="btn btn-outline-primary" onClick={() => setShowTransactions(!showTransactions)}>
               {showTransactions ? 'Продукты' : 'Покупки'}
@@ -156,7 +155,7 @@ function App() {
               removePhoto={removePhoto}
               getProducts={getProducts}
               createTransaction={createTransaction}
-              currency={currency}
+              // currency={currency}
             />
           )}
 

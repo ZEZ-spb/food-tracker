@@ -15,9 +15,8 @@ export const createTransaction = async (
             req.body.type,
             req.body.quantity,
             req.body.cost,
-            req.body.currency
+//            req.body.currency
         )
-        console.log('userId из токена:', req.userId)
         res.status(201).json({ message: `Покупка/расход добавлен` })
     } catch (error) {
         next(error)
@@ -59,8 +58,13 @@ export const updateTransaction = async (
     next: NextFunction,
 ) => {
     try {
-        const transaction = await transactionsService.updateTransaction(Number(req.params.id), req.userId!,
-            req.body.quantity_delta, req.body.cost)
+        const transaction = await transactionsService.updateTransaction(
+            Number(req.params.id), 
+            req.userId!,
+            req.body.quantity_delta, 
+            req.body.cost, 
+//            req.body.currency
+        )
         res.json(transaction)
     } catch (error) {
         next(error)
