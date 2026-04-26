@@ -68,7 +68,7 @@ export const updateProduct = async (id: number, userId: number, dto: ProductDto)
       quantity_delta: quantity_delta,
       quantity_after: dto.quantity,
       cost: null,
-      currency: null
+//      currency: null
     })
 
     await transactionRepository.save(transaction)
