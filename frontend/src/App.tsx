@@ -6,6 +6,7 @@ import { RegisterForm } from './components/Auth/RegisterForm'
 import { useState, useEffect } from 'react'
 import { ProductsTable } from './components/Products/ProductsTable'
 import { TransactionsPage } from './components/Transactions/TransactionsPage'
+import { HelpModal } from './components/HelpModal'
 
 function App() {
   const { token, email, currency, isAuthenticated, login, register, logout, removeUser,
@@ -25,6 +26,7 @@ function App() {
   const [showCurrentPassword, setShowCurrentPassword] = useState(false)
   const [showNewPassword, setShowNewPassword] = useState(false)
   const [showTransactions, setShowTransactions] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -90,66 +92,46 @@ function App() {
 
         <div>
 
-      
+          <nav className="navbar px-3 flex-wrap gap-2" style={{ backgroundColor: '#7B9BAD' }}>
 
+            <div className="d-flex align-items-center gap-2">
+              <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
+              <span className="fw-bold text-white fs-5">Корзинка</span>
+            </div>
 
+            <div className="d-flex align-items-center gap-2 ms-auto">
+              <button className="btn btn-light btn-sm" onClick={() => setShowTransactions(!showTransactions)}>
+                {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
+              </button>
 
+              <div className="dropdown">
+                <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+                  {email}
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end">
+                  <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
+                  <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
+                  <li>
+                    <div className="dropdown-item">
+                      Валюта:
+                      <select className="ms-2" value={currency}
+                        onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}>
+                        <option value="ILS">₪ шекель</option>
+                        <option value="EUR">€ евро</option>
+                        <option value="USD">$ доллар</option>
+                        <option value="RUB">₽ рубль</option>
+                      </select>
+                    </div>
+                  </li>
+                  <li><button className="dropdown-item" onClick={() => setShowHelp(true)}>Инструкция</button></li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
+                  <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
+                </ul>
+              </div>
+            </div>
 
-
-
-
-
-
-
-<nav className="navbar px-3 flex-wrap gap-2" style={{ backgroundColor: '#7B9BAD' }}>
-    
-    <div className="d-flex align-items-center gap-2">
-        <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
-        <span className="fw-bold text-white fs-5">Корзинка</span>
-    </div>
-
-    <div className="d-flex align-items-center gap-2 ms-auto">
-        <button className="btn btn-light btn-sm" onClick={() => setShowTransactions(!showTransactions)}>
-            {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
-        </button>
-
-        <div className="dropdown">
-            <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                {email}
-            </button>
-            <ul className="dropdown-menu dropdown-menu-end">
-<li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
-                <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
-                <li>
-                  <div className="dropdown-item">
-                    Валюта:
-                    <select className="ms-2" value={currency}
-                      onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}>
-                      <option value="ILS">₪ шекель</option>
-                      <option value="EUR">€ евро</option>
-                      <option value="USD">$ доллар</option>
-                      <option value="RUB">₽ рубль</option>
-                    </select>
-                  </div>
-                </li>
-                <li><hr className="dropdown-divider" /></li>
-                <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
-                <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>  
-            </ul>
-        </div>
-    </div>
-
-</nav>
-
-
-
-
-
-
-
-
-
-
+          </nav>
 
           {
             showTransactions ? (
@@ -285,6 +267,8 @@ function App() {
           </div>
         )
       }
+
+      {showHelp && <HelpModal onClose={() => setShowHelp(false)} />}
 
     </div >
   )
