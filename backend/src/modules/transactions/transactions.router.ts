@@ -13,14 +13,14 @@ router.post('/',                    // POST / = создать транзакц�
 
 router.get('/',                     //GET   / = получить все транзакции
     authenticate,
-    getTransactions)  
-    
+    getTransactions)
+
 router.delete('/:id',                //DELETE   / = удалить транзакцию
     authenticate,
-    removeTransaction) 
-    
+    removeTransaction)
+
 router.patch('/:id',                  //PATCH   / = обновить транзакцию
     authenticate,
-    updateTransaction)     
+    updateTransaction)
 
 export default router    

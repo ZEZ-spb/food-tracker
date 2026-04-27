@@ -18,10 +18,10 @@ export class User {
   @OneToMany(() => Product, (product) => product.user)
   products: Product[]
 
-  @Column({ 
-  type: 'enum', 
-  enum: ['ILS', 'EUR', 'USD', 'RUB'], 
-  default: 'ILS' 
-})
-currency: 'ILS' | 'EUR' | 'USD' | 'RUB'
+  @Column({
+    type: 'enum',
+    enum: ['ILS', 'EUR', 'USD', 'RUB'],
+    default: 'ILS'
+  })
+  currency: 'ILS' | 'EUR' | 'USD' | 'RUB'
 }

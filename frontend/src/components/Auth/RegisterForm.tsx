@@ -30,16 +30,6 @@ export const RegisterForm = ({ onRegister }: { onRegister: (email: string, passw
                         />
                     </div>
 
-                    {/* <div className="mb-3">
-                        <label className="form-label">Password</label>
-                        <input
-                            type="password"
-                            className="form-control"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div> */}
-
                     <div className="mb-3">
                         <label className="form-label">Password</label>
                         <div className="input-group">

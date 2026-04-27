@@ -26,7 +26,7 @@ export const register = async (dto: RegisterDto): Promise<User> => {
   return userRepository.save(user)
 }
 
-export const login = async (dto: LoginDto): Promise<{token: string, currency: string}> => {
+export const login = async (dto: LoginDto): Promise<{ token: string, currency: string }> => {
   const user = await userRepository.findOne({
     where: { email: dto.email }
   })
@@ -88,7 +88,7 @@ export const updatePassword = async (userId: number, dto: UpdatePasswordDto) => 
 }
 
 export const removeUser = async (userId: number) => {
-const user = await userRepository.findOne({
+  const user = await userRepository.findOne({
     where: { id: userId }
   })
 
@@ -96,10 +96,10 @@ const user = await userRepository.findOne({
     throw new AppError('Пользователь не найден', 404)
   }
 
-return userRepository.remove(user)
+  return userRepository.remove(user)
 }
 
-export const getUsers = async() => {
+export const getUsers = async () => {
   const users = await userRepository.find({
     select: ['id', 'email', 'created_at']
   })

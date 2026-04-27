@@ -1,19 +1,21 @@
 import { Router } from 'express'
-import { registerController, loginController, updateEmailController, 
-    updatePasswordController, logoutController, removeController, 
-    getUsersController, updateCurrencyController } from './auth.controller'
+import {
+    registerController, loginController, updateEmailController,
+    updatePasswordController, logoutController, removeController,
+    getUsersController, updateCurrencyController
+} from './auth.controller'
 import { validateBody } from '../../middlewares/validate'
 import { RegisterDto, LoginDto, UpdateEmailDto, UpdatePasswordDto, UpdateCurrencyDto } from './auth.types'
 import { authenticate } from '../../middlewares/authenticate'
 
 const router = Router()
 
-router.post('/register', 
-    validateBody(RegisterDto), 
+router.post('/register',
+    validateBody(RegisterDto),
     registerController)
 
-router.post('/login', 
-    validateBody(LoginDto), 
+router.post('/login',
+    validateBody(LoginDto),
     loginController)
 
 router.patch('/update-email',
@@ -29,11 +31,11 @@ router.patch('/update-password',
 router.post('/logout',
     authenticate,
     logoutController)
-    
+
 router.delete('/',
     authenticate,
     removeController)
-    
+
 router.get('/',
     authenticate,
     getUsersController

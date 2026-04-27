@@ -23,12 +23,10 @@ export const getProducts = async (
 ) => {
     try {
         const products: Product[] = await productsService.getProducts(req.userId!)
-//        if (products.length===0)  {res.status(400).json({ message: 'Продуктов нет' })
-//            return}
         res.json(products)
-} catch (error) {
+    } catch (error) {
         next(error)
-    }        
+    }
 }
 
 export const updateProduct = async (
@@ -39,9 +37,9 @@ export const updateProduct = async (
     try {
         await productsService.updateProduct(Number(req.params.id), req.userId!, req.body)
         res.status(200).json({ message: `Продукт ${req.body.name} обновлен` })
-} catch (error) {
+    } catch (error) {
         next(error)
-    }        
+    }
 }
 
 export const removeProduct = async (
@@ -52,9 +50,9 @@ export const removeProduct = async (
     try {
         await productsService.removeProduct(Number(req.params.id), req.userId!)
         res.status(200).json({ message: `Продукт удален` })
-} catch (error) {
+    } catch (error) {
         next(error)
-    }        
+    }
 }
 
 export const updatePhoto = async (
@@ -71,7 +69,7 @@ export const updatePhoto = async (
         res.json({ message: 'Фото продукта обновлено' })
     } catch (error) {
         next(error)
-    }        
+    }
 }
 
 export const removePhoto = async (
@@ -79,18 +77,18 @@ export const removePhoto = async (
     res: Response,
     next: NextFunction,
 ) => {
-    try {         
+    try {
         await productsService.removePhoto(Number(req.params.id), req.userId!)
         res.json({ message: 'Фото продукта удалено' })
     } catch (error) {
         next(error)
-    }        
+    }
 }
 
 
 
 
-        
+
 
 
 

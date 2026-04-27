@@ -1,17 +1,16 @@
 import { useState, useRef } from "react"
 import type { Product, ProductsTableProps } from '../../types'
 
-export const ProductsTable = ({ 
-    products, 
-    token, 
-    createProduct, 
-    updateProduct, 
+export const ProductsTable = ({
+    products,
+    token,
+    createProduct,
+    updateProduct,
     removeProduct,
-    updatePhoto, 
-    removePhoto, 
-    getProducts, 
-    createTransaction, 
-//    currency 
+    updatePhoto,
+    removePhoto,
+    getProducts,
+    createTransaction,
 }: ProductsTableProps) => {
 
     const fileInputRef = useRef<HTMLInputElement>(null)
@@ -123,7 +122,6 @@ export const ProductsTable = ({
                 type,
                 Number(transactionQuantity),
                 transactionCost ? Number(transactionCost) : undefined,
-//                currency as 'ILS' | 'EUR' | 'USD' | 'RUB' | undefined
             )
             await getProducts(token)
             setTransactionQuantity('')
@@ -277,11 +275,6 @@ export const ProductsTable = ({
 
                 <div>
                     <label className="form-label">Единица измерения</label>
-                    {/* <select
-                        className="form-select"
-                        value={unit}
-                        onChange={(e) => setUnit(e.target.value as 'шт.' | 'кг' | 'л')}
-                    > */}
 
                     <select
                         className="form-select"
@@ -358,8 +351,6 @@ export const ProductsTable = ({
                                 onChange={(e) => setTransactionCost(e.target.value)}
                             />
                         </div>
-                        {/* <button className="btn btn-success">Покупка</button>
-                        <button className="btn btn-warning">Расход</button> */}
                         <button className="btn btn-success" onClick={() => handleTransaction('purchase')}>Покупка</button>
                         <button className="btn btn-warning" onClick={() => handleTransaction('expense')}>Расход</button>
                         <button className="btn btn-secondary" onClick={() => setSelectedProduct(null)}>Отмена</button>

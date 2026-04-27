@@ -23,7 +23,6 @@ export const useTransactions = () => {
         type: 'purchase' | 'expense',
         quantity: number,
         cost?: number,
-//        currency?: 'ILS' | 'EUR' | 'USD' | 'RUB',
     ) => {
         await transactionsApi.createTransaction(
             token,
@@ -31,7 +30,6 @@ export const useTransactions = () => {
             type,
             quantity,
             cost,
-//            currency
         )
     }
 
@@ -40,17 +38,15 @@ export const useTransactions = () => {
         id: number,
         quantity: number,
         cost?: number | null,
-//        currency?: string | null,
     ) => {
         await transactionsApi.updateTransaction(
             token,
             id,
             quantity,
             cost,
-//            currency
         )
-    } 
-    
+    }
+
     const removeTransaction = async (
         token: string,
         id: number,
@@ -59,7 +55,7 @@ export const useTransactions = () => {
             token,
             id
         )
-    }    
+    }
 
     return { transactions, createTransaction, getTransactions, updateTransaction, removeTransaction }
 }

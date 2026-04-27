@@ -87,8 +87,8 @@ export const useProducts = () => {
     }
 
     const clearProducts = () => {
-    setProducts([])
-}
+        setProducts([])
+    }
 
     return {
         products, getProducts, createProduct, updateProduct,

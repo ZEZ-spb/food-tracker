@@ -90,31 +90,28 @@ function App() {
 
         <div>
 
+          <nav className="navbar px-3 flex-wrap" style={{ backgroundColor: '#7B9BAD' }}>
+            <div className="d-flex align-items-center gap-2">
+              <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
+              <span className="fw-bold text-white fs-5">Корзинка</span>
+            </div>
 
-          <div className="d-flex justify-content-between align-items-center p-3">
-
-            <button className="btn btn-outline-primary" onClick={() => setShowTransactions(!showTransactions)}>
-              {showTransactions ? 'Продукты' : 'Покупки'}
+            <button className="btn btn-light btn-sm" onClick={() => setShowTransactions(!showTransactions)}>
+              {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
             </button>
 
             <div className="dropdown">
-              <button className="btn btn-outline-secondary dropdown-toggle"
-                data-bs-toggle="dropdown">
+              <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
                 {email}
               </button>
               <ul className="dropdown-menu dropdown-menu-end">
-                {/* <li><button className="dropdown-item">Изменить email</button></li> */}
                 <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
                 <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
-
                 <li>
                   <div className="dropdown-item">
                     Валюта:
-                    <select
-                      className="ms-2"
-                      value={currency}
-                      onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}
-                    >
+                    <select className="ms-2" value={currency}
+                      onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}>
                       <option value="ILS">₪ шекель</option>
                       <option value="EUR">€ евро</option>
                       <option value="USD">$ доллар</option>
@@ -122,29 +119,27 @@ function App() {
                     </select>
                   </div>
                 </li>
-
                 <li><hr className="dropdown-divider" /></li>
                 <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
                 <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
               </ul>
             </div>
-          </div>
+          </nav>
 
           {showTransactions ? (
 
-            // <p>Покупки — здесь будет таблица транзакций</p>
-
-<TransactionsPage
-    transactions={transactions}
-    token={token}
-    period="1m"
-    getTransactions={getTransactions}
-    removeTransaction={removeTransaction}
-    updateTransaction={updateTransaction}
-    currency={currency}
-/>
+            <TransactionsPage
+              transactions={transactions}
+              token={token}
+              period="1m"
+              getTransactions={getTransactions}
+              removeTransaction={removeTransaction}
+              updateTransaction={updateTransaction}
+              currency={currency}
+            />
 
           ) : (
+
             <ProductsTable
               products={products}
               token={token}
@@ -155,8 +150,8 @@ function App() {
               removePhoto={removePhoto}
               getProducts={getProducts}
               createTransaction={createTransaction}
-              // currency={currency}
             />
+
           )}
 
         </div>

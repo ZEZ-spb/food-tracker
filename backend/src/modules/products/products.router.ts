@@ -8,30 +8,30 @@ import { upload } from '../../config/multer'
 const router = Router()
 
 router.post('/',                    // POST / = создать продукт    
-    authenticate, 
-    validateBody(ProductDto), 
+    authenticate,
+    validateBody(ProductDto),
     createProduct)
 
 router.get('/',                     //GET   / = получить все свои продукты
     authenticate,
-    getProducts)  
-    
+    getProducts)
+
 router.put('/:id',                  //PUT   / = обновить продукт
     authenticate,
-    validateBody(ProductDto), 
-    updateProduct) 
+    validateBody(ProductDto),
+    updateProduct)
 
 router.delete('/:id',                //DELETE   / = удалить продукт
     authenticate,
-    removeProduct) 
-    
+    removeProduct)
+
 router.patch('/:id/photo',          //PATCH     / = добавить-обновить фото
     authenticate,
     upload.single('photo'),
-    updatePhoto)  
+    updatePhoto)
 
 router.delete('/:id/photo',         //DELETE   / = удалить фото
     authenticate,
-    removePhoto)        
+    removePhoto)
 
 export default router

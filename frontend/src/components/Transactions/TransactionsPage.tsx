@@ -41,11 +41,10 @@ export const TransactionsPage = ({ transactions, token, getTransactions,
     const handleUpdate = async (): Promise<void> => {
         try {
             await updateTransaction(
-                token, 
-                editingId!, 
+                token,
+                editingId!,
                 Number(editQuantity) || 0,
                 editCost !== '' ? Number(editCost) : null,
-//                editCost !== '' ? currency as 'ILS' | 'EUR' | 'USD' | 'RUB' : null
             )
             await getTransactions(token, period)
             setEditingId(null)
@@ -122,7 +121,6 @@ export const TransactionsPage = ({ transactions, token, getTransactions,
                                             ? <input type="number" className="form-control" value={editCost}
                                                 step="0.01" min="0"
                                                 onChange={(e) => setEditCost(e.target.value)} />
-                                            // : t.cost && t.currency === currency ? `${t.cost} ${t.currency}` : '—'
                                             : t.cost ? `${t.cost}` : '—'
                                         }
                                     </td>
@@ -157,7 +155,6 @@ export const TransactionsPage = ({ transactions, token, getTransactions,
                     <tr className="table-dark fw-bold">
                         <td colSpan={3} className="text-end">Итого за период:</td>
                         <td>
-                            {/* {purchases.reduce((sum, t) => sum + (t.currency === currency ? Number(t.cost || 0) : 0), 0).toFixed(2)} {currency} */}
                             {purchases.reduce((sum, t) => sum + (Number(t.cost || 0)), 0).toFixed(2)} {currency}
                         </td>
                     </tr>
@@ -193,7 +190,6 @@ export const TransactionsPage = ({ transactions, token, getTransactions,
                                             : `${Math.abs(Number(t.quantity_delta))} ${t.product.unit}`
                                         }
                                     </td>
-
                                 </tr >
 
                             ))}

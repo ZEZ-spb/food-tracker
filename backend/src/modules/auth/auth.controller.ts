@@ -63,7 +63,7 @@ export const logoutController = async (
   res: Response,
   next: NextFunction
 ) => {
-  res.json( { message: 'Вы вышли из системы' } )
+  res.json({ message: 'Вы вышли из системы' })
 }
 
 export const removeController = async (
@@ -71,7 +71,7 @@ export const removeController = async (
   res: Response,
   next: NextFunction
 ) => {
-try {
+  try {
     await authService.removeUser(req.userId!)
     res.json({ message: 'Ваш аккаунт удален' })
   } catch (error) {
@@ -83,11 +83,11 @@ export const getUsersController = async (
   req: AuthRequest,
   res: Response,
   next: NextFunction
-)=> {
-try {
-  const users: User[] = await authService.getUsers()
-  res.json(users)
-} catch (error) {
+) => {
+  try {
+    const users: User[] = await authService.getUsers()
+    res.json(users)
+  } catch (error) {
     next(error)
   }
 }
