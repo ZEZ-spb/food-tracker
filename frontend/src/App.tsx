@@ -100,43 +100,71 @@ function App() {
 
 
 
-          <nav className="navbar px-3 flex-wrap gap-2" style={{ backgroundColor: '#7B9BAD' }}>
-            <div className="d-flex align-items-center gap-2">
-              <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
-              <span className="fw-bold text-white fs-5">Корзинка</span>
-            </div>
+          // <nav className="navbar px-3 flex-wrap gap-2" style={{ backgroundColor: '#7B9BAD' }}>
+          //   <div className="d-flex align-items-center gap-2">
+          //     <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
+          //     <span className="fw-bold text-white fs-5">Корзинка</span>
+          //   </div>
 
-            <div className="d-flex align-items-center gap-2 ms-auto">
-              <button className="btn btn-light btn-sm" onClick={() => setShowTransactions(!showTransactions)}>
-                {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
-              </button>
+          //   <div className="d-flex align-items-center gap-2 ms-auto">
+          //     <button className="btn btn-light btn-sm" onClick={() => setShowTransactions(!showTransactions)}>
+          //       {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
+          //     </button>
 
-              <div className="dropdown">
-                <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
-                  {email}
-                </button>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
-                  <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
-                  <li>
-                    <div className="dropdown-item">
-                      Валюта:
-                      <select className="ms-2" value={currency}
-                        onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}>
-                        <option value="ILS">₪ шекель</option>
-                        <option value="EUR">€ евро</option>
-                        <option value="USD">$ доллар</option>
-                        <option value="RUB">₽ рубль</option>
-                      </select>
-                    </div>
-                  </li>
-                  <li><hr className="dropdown-divider" /></li>
-                  <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
-                  <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+          //     <div className="dropdown">
+          //       <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+          //         {email}
+          //       </button>
+          //       <ul className="dropdown-menu dropdown-menu-end">
+          //         <li><button className="dropdown-item" onClick={() => setShowEmailModal(true)}>Изменить email</button></li>
+          //         <li><button className="dropdown-item" onClick={() => setShowPasswordModal(true)}>Изменить пароль</button></li>
+          //         <li>
+          //           <div className="dropdown-item">
+          //             Валюта:
+          //             <select className="ms-2" value={currency}
+          //               onChange={(e) => updateCurrency(e.target.value as 'ILS' | 'EUR' | 'USD' | 'RUB')}>
+          //               <option value="ILS">₪ шекель</option>
+          //               <option value="EUR">€ евро</option>
+          //               <option value="USD">$ доллар</option>
+          //               <option value="RUB">₽ рубль</option>
+          //             </select>
+          //           </div>
+          //         </li>
+          //         <li><hr className="dropdown-divider" /></li>
+          //         <li><button className="dropdown-item" onClick={handleLogout}>Выйти</button></li>
+          //         <li><button className="dropdown-item text-danger" onClick={handleRemoveUser}>Удалить аккаунт</button></li>
+          //       </ul>
+          //     </div>
+          //   </div>
+          // </nav>
+
+
+
+
+
+
+
+<nav className="navbar px-3 flex-wrap gap-2" style={{ backgroundColor: '#7B9BAD' }}>
+    
+    <div className="d-flex align-items-center gap-2">
+        <img src="/favicon1.svg" alt="logo" style={{ width: '32px', height: '32px' }} />
+        <span className="fw-bold text-white fs-5">Корзинка</span>
+    </div>
+
+    <button className="btn btn-light btn-sm mx-auto" onClick={() => setShowTransactions(!showTransactions)}>
+        {showTransactions ? 'Посмотреть продукты' : 'Посмотреть покупки'}
+    </button>
+
+    <div className="dropdown">
+        <button className="btn btn-light btn-sm dropdown-toggle" data-bs-toggle="dropdown">
+            {email}
+        </button>
+        <ul className="dropdown-menu dropdown-menu-end">
+            ...
+        </ul>
+    </div>
+
+</nav>
 
 
 
