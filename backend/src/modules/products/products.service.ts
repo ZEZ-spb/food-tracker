@@ -35,8 +35,8 @@ export const getProducts = async (userId: number): Promise<Product[]> => {
     where: { user_id: userId },
     order: { name: 'ASC' }
   })
-  if (products.length === 0)
-    throw new AppError('Продуктов пока нет', 404)
+  // if (products.length === 0)
+  //   throw new AppError('Продуктов пока нет', 404)
 
   return products
 }
